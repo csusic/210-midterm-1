@@ -28,29 +28,40 @@ private:
 public:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
+    //function to insert values at head, tail, in between, etc.
+    //takes two arguments, value and position
     void insert_after(int value, int position) {
+        
+        //validates the index of the position
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
         }
 
+        //new node is created, value is used as an argument
         Node* newNode = new Node(value);
-        if (!head) {
-            head = tail = newNode;
+        if (!head) { //if the list is empty 
+            head = tail = newNode; //the newNode becomes the head and the tail
             return;
         }
 
-        Node* temp = head;
+        //if the list is not empty
+        Node* temp = head; //new pointer points to the head
+        //for loop with position
         for (int i = 0; i < position && temp; ++i)
-            temp = temp->next;
+            temp = temp->next; //makes sure temp is valid (within the list)
 
+        //if temp is not valid(outside the list)
         if (!temp) {
+            //error message
             cout << "Position exceeds list size. Node not inserted.\n";
-            delete newNode;
+            delete newNode; //delete Node
             return;
         }
 
-        newNode->next = temp->next;
+        //newNodes next pointer becomes temps next pointer
+        newNode->next = temp->next; 
+        //newNodes 
         newNode->prev = temp;
         if (temp->next)
             temp->next->prev = newNode;
