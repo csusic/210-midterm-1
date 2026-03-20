@@ -244,8 +244,8 @@ public:
             return;
         }
         while (current) { //if current is valid
-            cout << current->data << " ";
-            current = current->next;
+            cout << current->data << " "; //output current data
+            current = current->next->next; //traverse forwards
         }
         cout << endl;
     }
