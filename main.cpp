@@ -181,11 +181,11 @@ public:
             cout << "List is empty." << endl;
             return;
         }
-        Node * temp = tail;
+        Node * temp = tail; //new pointer temp points to the tail
 
         if (tail->prev) { //if the tail 
             tail = tail->prev;
-            tail->next = nullptr;
+            tail->next = nullptr; //set 
         }
         else //otherwise
             head = tail = nullptr; //set head and tail to null
@@ -206,8 +206,8 @@ public:
             return;
         }
         while (current) { //if current is valid
-            cout << current->data << " ";
-            current = current->next;
+            cout << current->data << " "; //output current data
+            current = current->next; //travers forwards
         }
         cout << endl;
     }
@@ -218,9 +218,9 @@ public:
             cout << "List is empty." << endl;
             return;
         }
-        while (current) {
-            cout << current->data << " ";
-            current = current->prev;
+        while (current) { //if current is valid
+            cout << current->data << " "; //output current data
+            current = current->prev; //traverse backwards
         }
         cout << endl;
     }
@@ -230,13 +230,33 @@ public:
     //output thid, skip fourth, etc
     //demo method
     void every_other_element() {
-        
+        Node* current = head;
+        if (!current) { //if the list is empty
+            cout << "List is empty." << endl;
+            return;
+        }
+        while (current) { //if current is valid
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
     }
 };
 
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
+    //driver program
+    DoublyLinkedList list;
+    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+
+    for (int i = 0; i < size; ++i)
+        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+    cout << "List forward: ";
+    list.print();
+    
+    cout << "List prints every other element: ";
+    list.every_other_element();
     
     return 0;
 }
