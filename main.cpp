@@ -108,12 +108,13 @@ public:
             return;
         }
     
+        //if the position is 1
         if (pos == 1) {
-            pop_front();
+            pop_front(); //delete node
             return;
         }
     
-        Node* temp = head;
+        Node* temp = head; //new pointer temp points to the head
     
         for (int i = 1; i < pos; i++){
             if (!temp) {
@@ -145,7 +146,7 @@ public:
         if (!tail) //if the list is empty
             head = tail = newNode; //the newNode becomes the head and the tail
         else { //if the list is not empty
-            tail->next = newNode;
+            tail->next = newNode; 
             newNode->prev = tail;
             tail = newNode;
         }
@@ -177,7 +178,7 @@ public:
             head->prev = nullptr;
         }
         else
-            head = tail = nullptr;
+            head = tail = nullptr;  //set head and tail to null
         delete temp;  //delete temp pointer
     }
 
@@ -188,7 +189,7 @@ public:
         }
         Node * temp = tail; //new pointer temp points to the tail
 
-        if (tail->prev) { //if the tail 
+        if (tail->prev) { //if 
             tail = tail->prev;
             tail->next = nullptr; //set 
         }
@@ -197,11 +198,12 @@ public:
         delete temp; //delete temp pointer
     }
 
+    //deleting the whole linked list
     ~DoublyLinkedList() {
-        while (head) {
-            Node* temp = head;
-            head = head->next;
-            delete temp;
+        while (head) { //while head exists
+            Node* temp = head; //new pointer temp points to the head
+            head = head->next; //head points to the next
+            delete temp; //delete temp pointer
         }
     }
     
@@ -235,8 +237,7 @@ public:
     
     //output data structure starting with
     //every first element, skip second, 
-    //output thid, skip fourth, etc
-    //demo method
+    //output thid, skip fourth, etc.
     void every_other_element() {
         Node* current = head;
         if (!current) { //if the list is empty
@@ -245,7 +246,7 @@ public:
         }
         while (current) { //if current is valid
             cout << current->data << " "; //output current data
-            current = current->next->next; //traverse forwards
+            current = current->next->next; //traverse forwards by every other
         }
         cout << endl;
     }
