@@ -9,10 +9,10 @@ const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 class DoublyLinkedList {
 //private data
 private:
-    //a struct containing the a node
+    //a struct containing the node
     struct Node {
-        int data;
-        Node* prev;
+        int data; //integer to hold the data
+        Node* prev;  
         Node* next;
         Node(int val, Node* p = nullptr, Node* n = nullptr) {
             data = val; 
@@ -71,29 +71,34 @@ public:
         temp->next = newNode;
     }
 
-    //function to delete 
+    //function to delete node by value
     void delete_val(int value) {
         //if the list is empty
         if (!head) return;
 
+        //new pointer temp points to the head
         Node* temp = head;
         
+        //searches for the node with a specific value
         while (temp && temp->data != value)
             temp = temp->next;
 
+        //the value isn't found
         if (!temp) return; 
 
-        if (temp->prev)
-            temp->prev->next = temp->next;
-        else
-            head = temp->next; 
+        //checks to see if the node is the head
+        if (temp->prev) //if the hode is the head
+            temp->prev->next = temp->next; //node redirected
+        else //otherwise
+            head = temp->next; //delete head
 
-        if (temp->next)
-            temp->next->prev = temp->prev;
-        else
-            tail = temp->prev; 
+        //checks to see if the node is the tail
+        if (temp->next) //if the node is the tail
+            temp->next->prev = temp->prev; //node redirected
+        else //otherwise
+            tail = temp->prev; //delete tail
 
-        delete temp;
+        delete temp; //delete memory
     }
 
     //function to delete nodes position
@@ -199,6 +204,8 @@ public:
             delete temp;
         }
     }
+    
+    //function to print the doubly linked list
     void print() {
         Node* current = head;
         if (!current) { //if the list is empty
@@ -207,11 +214,12 @@ public:
         }
         while (current) { //if current is valid
             cout << current->data << " "; //output current data
-            current = current->next; //travers forwards
+            current = current->next; //traverse forwards
         }
         cout << endl;
     }
 
+    //function to print the doubly linked list in reverse
     void print_reverse() {
         Node* current = tail;
         if (!current) { //if the list is empty
