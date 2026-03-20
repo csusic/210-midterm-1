@@ -61,8 +61,9 @@ public:
 
         //newNodes next pointer becomes temps next pointer
         newNode->next = temp->next; 
-        //newNodes 
+        //newNodes previous pointer becomes temp
         newNode->prev = temp;
+        //redirects pointers
         if (temp->next)
             temp->next->prev = newNode;
         else
@@ -70,7 +71,9 @@ public:
         temp->next = newNode;
     }
 
+    //function to delete 
     void delete_val(int value) {
+        //if the list is empty
         if (!head) return;
 
         Node* temp = head;
@@ -93,8 +96,9 @@ public:
         delete temp;
     }
 
+    //function to delete nodes position
     void delete_pos(int pos) {
-        if (!head) {
+        if (!head) { //if the list is empty
             cout << "List is empty." << endl;
             return;
         }
@@ -127,14 +131,15 @@ public:
         Node* tempPrev = temp->prev;
         tempPrev->next = temp->next;
         temp->next->prev = tempPrev;
-        delete temp;
+        delete temp; //delete temp pointer
     }
 
     void push_back(int v) {
+        //new node is created, v is used as an argument
         Node* newNode = new Node(v);
-        if (!tail)
-            head = tail = newNode;
-        else {
+        if (!tail) //if the list is empty
+            head = tail = newNode; //the newNode becomes the head and the tail
+        else { //if the list is not empty
             tail->next = newNode;
             newNode->prev = tail;
             tail = newNode;
@@ -142,24 +147,25 @@ public:
     }
     
     void push_front(int v) {
+        //new node is created, v is used as an argument
         Node* newNode = new Node(v);
-        if (!head)
-            head = tail = newNode;
-        else {
+        if (!head) //if the list is empty
+            head = tail = newNode; //the newNode becomes the head and the tail
+        else { //if the list is not empty
             newNode->next = head;
             head->prev = newNode;
-            head = newNode;
+            head = newNode; 
         }
     }
     
     void pop_front() {
 
-        if (!head) {
+        if (!head) { //if the list is empty
             cout << "List is empty." << endl;
             return;
         }
 
-        Node * temp = head;
+        Node * temp = head; //new pointer temp points to the head
 
         if (head->next) {
             head = head->next;
@@ -167,23 +173,23 @@ public:
         }
         else
             head = tail = nullptr;
-        delete temp;
+        delete temp;  //delete temp pointer
     }
 
     void pop_back() {
-        if (!tail) {
+        if (!tail) { //if the list is empty
             cout << "List is empty." << endl;
             return;
         }
         Node * temp = tail;
 
-        if (tail->prev) {
+        if (tail->prev) { //if the tail 
             tail = tail->prev;
             tail->next = nullptr;
         }
-        else
-            head = tail = nullptr;
-        delete temp;
+        else //otherwise
+            head = tail = nullptr; //set head and tail to null
+        delete temp; //delete temp pointer
     }
 
     ~DoublyLinkedList() {
@@ -195,11 +201,11 @@ public:
     }
     void print() {
         Node* current = head;
-        if (!current) {
+        if (!current) { //if the list is empty
             cout << "List is empty." << endl;
             return;
         }
-        while (current) {
+        while (current) { //if current is valid
             cout << current->data << " ";
             current = current->next;
         }
@@ -208,7 +214,7 @@ public:
 
     void print_reverse() {
         Node* current = tail;
-        if (!current) { 
+        if (!current) { //if the list is empty
             cout << "List is empty." << endl;
             return;
         }
